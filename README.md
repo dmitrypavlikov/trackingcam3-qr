@@ -1,3 +1,5 @@
-# trackingcam3-qr
+# **trackingcam3-qr**
 ![https://github.com/dmitrypavlikov/trackingcam3-qr](./images/trackingcam3-qr-prlogo.png)
-## Package description
+## **Dependences:**
+- [cv2](https://opencv.org/get-started/)
+- [motorcortex-python](https://docs.motorcortex.io/docs/developing-client-applications/python/install/)
