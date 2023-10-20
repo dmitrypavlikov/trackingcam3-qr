@@ -2,7 +2,6 @@
 import cv2
 import numpy as np
 import os
-import time
 import motorcortex
 import time
 
@@ -10,7 +9,7 @@ qrCodeDetector = cv2.QRCodeDetector()
 
 class QrRecognizer(object):
     def __init__(self):
-        self.start = time.time()
+        self.decoded_text = ""
         self.ip = "192.168.42.1"
         self.frame = "tracking_cam3"
         parameter_tree = motorcortex.ParameterTree()
@@ -28,20 +27,15 @@ class QrRecognizer(object):
     def onImage(self, val):
         try:
             image = cv2.imdecode(np.frombuffer(val[1].value, np.uint8), cv2.COLOR_BGR2GRAY)
-            decodedText, points, _ = qrCodeDetector.detectAndDecode(image)
+            self.decoded_text, points, _ = qrCodeDetector.detectAndDecode(image)
         except Exception as e:
             print(e)
+        
         if points is not None:
-            # nrOfPoints = len(points)
-            # for i in range(nrOfPoints):
-            #     nextPointIndex = (i+1) % nrOfPoints
-            #     cv2.line(image, tuple(points[i][0].astype('int32')), tuple(points[nextPointIndex][0].astype('int32')), (255,0,0), 5)
-            print(decodedText)    
-            #cv2.imshow("Image", image)
-            #cv2.waitKey(0)
-            #cv2.destroyAllWindows()
+            print(self.decoded_text)    
         else:
-            print("QR code not detected")
+            print("QR not detected")
+
 
 if __name__ == "__main__":
     qr_recognizer = QrRecognizer()
